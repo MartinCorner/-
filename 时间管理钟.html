@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title></title>
+    
+    <style>
+        html,
+        body,
+        .container{
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+        }
+        body{
+            display: flex;
+        }
+        .container{
+            width: 500px;
+            height: 260px;
+            margin: 40px 35px 20px 35px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        @font-face {
+            font-family: 'CLOCK2017L';
+            src: url('./CLOCK2017L.TTF') format('truetype');
+            -webkit-font-smoothing: 'antialiased';
+        }
+
+        @keyframes touches
+        {
+            from {
+                background-position: 200% 0;
+            }
+            to {
+                background-position: 0 0;
+            }
+        }
+
+        .clock{
+            margin: 20px 0 30px 0;
+            font-size: 150px;
+            font-family: 'CLOCK2017L';
+            background-size: 200%;
+            animation: touches 3s linear infinite;
+            -webkit-animation: touches 3s linear infinite;
+            background-image: linear-gradient(to right, rgb(49, 82, 133) 0%, rgb(49, 82, 133) 40%, rgb(186, 213, 255) 50%, rgb(49, 82, 133) 60%, rgb(49, 82, 133) 100%);
+            background-image: -webkit-gradient(linear, left top, right top, from(rgb(49, 82, 133)), color-stop(0.5, rgb(186, 213, 255)), to(rgb(49, 82, 133)));
+            display: inline-block;
+            color: green;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .time_s{
+            font-size: 40px;
+            padding-left: 10px;
+        }
+
+        .scroll-panel{
+            height: 200px;
+            width: 100px;
+            overflow: hidden;
+        }
+        .list{
+            height: 3500px;
+            width: 100px;
+            transform: translateY(0%);
+            -webkit-transform: translateY(0%) translateY(30px);
+        }
+        .item{
+            width: 100%;
+            /*border: 1px #333 solid;*/
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .text{
+            font-size: 14px;
+        }
+        .panel{
+            position: relative;
+            margin: 20px;
+        }
+        .pointer{
+            position: absolute;
+            left: -10px;
+            top: 20px;
+            width: 120px;
+            height: 20px;
+            border: 2px red solid;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="clock"></div>
+
+        <div class="panel">
+            <div class="scroll-panel">
+                <div class="list"></div>
+            </div>
+            <div class="pointer"></div>
+        </div>
+    </div>
+
+    <script>
+
+        var items = [
+            {'name': '睡觉', 'time': '0:00-8:00', 'color': '#7F7F7F'},
+            {'name': '    ', 'time': '8:00-8:45', 'color': '#FFFFFF'},
+            {'name': '早饭', 'time': '8:45-9:15', 'color': '#ff9103'},
+            {'name': '工作', 'time': '9:15-10:20', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '10:20-10:30', 'color': '#98e22e'},
+            {'name': '工作', 'time': '10:30-10:55', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '10:55-11:00', 'color': '#98e22e'},
+            {'name': '工作', 'time': '11:00-11:25', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '11:25-11:30', 'color': '#98e22e'},
+            {'name': '工作', 'time': '11:30-11:55', 'color': '#63b5fb'},
+            {'name': '午饭', 'time': '11:55-12:45', 'color': '#ff9103'},
+            {'name': '午睡', 'time': '12:45-13:30', 'color': '#7F7F7F'},
+            {'name': '工作', 'time': '13:30-13:55', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '13:55-14:00', 'color': '#98e22e'},
+            {'name': '工作', 'time': '14:00-14:25', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '14:25-14:30', 'color': '#98e22e'},
+            {'name': '工作', 'time': '14:30-14:55', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '14:55-15:00', 'color': '#98e22e'},
+            {'name': '工作', 'time': '15:00-15:25', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '15:25-15:30', 'color': '#98e22e'},
+            {'name': '工作', 'time': '15:30-15:55', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '15:55-16:00', 'color': '#98e22e'},
+            {'name': '工作', 'time': '16:00-16:25', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '16:25-16:30', 'color': '#98e22e'},
+            {'name': '工作', 'time': '16:30-16:55', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '16:55-17:00', 'color': '#98e22e'},
+            {'name': '工作', 'time': '17:00-17:25', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '17:25-17:30', 'color': '#98e22e'},
+            {'name': '工作', 'time': '17:30-17:55', 'color': '#63b5fb'},
+            {'name': '休息', 'time': '17:55-18:00', 'color': '#98e22e'},
+            {'name': '工作', 'time': '18:00-18:30', 'color': '#63b5fb'},
+            {'name': '晚饭', 'time': '18:30-19:30', 'color': '#ff9103'},
+            {'name': '    ', 'time': '19:30-22:00', 'color': '#FFFFFF'},
+            {'name': '运动', 'time': '22:00-22:30', 'color': '#e24b40'},
+            {'name': '    ', 'time': '22:30-23:00', 'color': '#FFFFFF'},
+            {'name': '    ', 'time': '23:00-0:00', 'color': '#FFFFFF'},
+        ];
+        
+        window.setInterval('run()', 1000);
+        setListItem();
+        
+        function run(){
+            var time = new Date();
+            var time_h = time.getHours();
+            var time_m = time.getMinutes();
+            var time_s = time.getSeconds();
+            if(time_m.toString().length == 1) time_m = "0" + time_m;
+            if(time_s.toString().length == 1) time_s = "0" + time_s;
+            var time = time_h+":"+time_m+"<span class='time_s'>"+time_s+"</span>";
+
+            var now_m = (time_h * 60) + parseInt(time_m) + (time_s / 60);
+            
+            document.querySelector('.clock').innerHTML = time;
+            document.querySelector('.list').style.cssText = "transform: translateY(-"+(now_m / 1440) * 100 +"%) translateY(30px);-webkit-transform: translateY(-"+(now_m / 1440) * 100 +"%) translateY(30px);";
+        }
+
+        function setListItem() {
+            var html = "";
+            for(var i=0 in items){
+                var time = items[i]['time'];
+                time = time.split('-');
+                var time1 = time[0].split(':')[0] * 60 + parseInt(time[0].split(':')[1]);
+                var time2 = time[1].split(':')[0] * 60 + parseInt(time[1].split(':')[1]);
+                var itemHeight = ((time2 - time1) / 1440) * 100;
+                html += '<div class="item" data-time="' + items[i]['time'] + '" style="height: '+itemHeight+'%;background-color: ' + items[i]['color'] + ';"><span class="text">' + items[i]['name'] + '</span></div>';
+            }
+            document.querySelector('.list').innerHTML = html;
+        }
+        
+    </script>
+</body>
+</html>
