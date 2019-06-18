@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <title></title>
-    
+
+    <!--<link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/37039/5d088e54f629da0fc0b4d58d.css' rel='stylesheet' type='text/css' />-->
+    <!--<link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/32780/5d088dcff629da0fc0b4d587.css' rel='stylesheet' type='text/css' />-->
+    <!--<link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/45195/5d088e15f629da0fc0b4d58b.css' rel='stylesheet' type='text/css' />-->
+    <!--<link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/46896/5d088e4ef629da0fc0b4d58c.css' rel='stylesheet' type='text/css' />-->
+    <!--<link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/46882/5d088faef629da0fc0b4d592.css' rel='stylesheet' type='text/css' />-->
+    <!--<link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/47103/5d088e0cf629da0fc0b4d588.css' rel='stylesheet' type='text/css' />-->
+    <link href='https://cdn.webfont.youziku.com/webfonts/nomal/131054/28595/5d08903ff629da0fc0b4d596.css' rel='stylesheet' type='text/css' />
     <style>
         html,
         body,
@@ -31,8 +38,16 @@
             -webkit-font-smoothing: 'antialiased';
         }
 
-        @keyframes touches
-        {
+        @keyframes touches {
+            from {
+                background-position: 200% 0;
+            }
+            to {
+                background-position: 0 0;
+            }
+        }
+
+        @-webkit-keyframes touches {
             from {
                 background-position: 200% 0;
             }
@@ -42,18 +57,37 @@
         }
 
         .clock{
-            margin: 20px 0 30px 0;
-            font-size: 150px;
-            font-family: 'CLOCK2017L';
+            width: 360px;
+            margin: 60px 0 100px 0;
+            font-size: 110px;
+            /*font-family: 'CLOCK2017L';*/
+            /*font-family: 'DS-Digital';*/
+            /*font-family: 'Futura-Thin';*/
+            /*font-family: 'Walkway';*/
+            /*font-family:'Helvetica-Neue-LT-Std';*/
+            /*font-family:'Gotham';*/
+            font-family:'ActionJackson';
+            font-weight: 100;
             background-size: 200%;
             animation: touches 3s linear infinite;
             -webkit-animation: touches 3s linear infinite;
-            background-image: linear-gradient(to right, rgb(49, 82, 133) 0%, rgb(49, 82, 133) 40%, rgb(186, 213, 255) 50%, rgb(49, 82, 133) 60%, rgb(49, 82, 133) 100%);
-            background-image: -webkit-gradient(linear, left top, right top, from(rgb(49, 82, 133)), color-stop(0.5, rgb(186, 213, 255)), to(rgb(49, 82, 133)));
             display: inline-block;
             color: green;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        .clock.theme-blue{
+            background-image: linear-gradient(55deg, #49789C 0%, #2C7EDB 30%, #0ABAA7 40%, #01cc9a 45%, #3cdfb7 50%, #01cc9a 55%, #0ABAA7 60%, #2C7EDB 70%, #49789C 100%);
+        }
+        .clock.theme-orange{
+            background-image: linear-gradient(55deg, #f74320 0%, #fc5220 30%, #fc6336 40%, #fec532 45%, #fdcc4d 50%, #fec532 55%, #fc6336 60%, #fc5220 70%, #f74320 100%);
+        }
+
+        .clock.theme-purple{
+            background-image: linear-gradient(55deg, #A942D4 0%, #843AD4 30%, #7260D4 40%, #315285 45%, #BAD5FF 50%, #315285 55%, #7260D4 60%, #843AD4 70%, #A942D4 100%);
+        }
+        .clock.theme-1{
+            background-image: linear-gradient(55deg, #fb3 0%, #fc5220 30%, #fc6336 40%, #fec532 45%, #fb3 50%, #fec532 55%, #fc6336 60%, #fc5220 70%, #fb3 100%);
         }
 
         .time_s{
@@ -99,7 +133,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="clock"></div>
+        <div class="clock theme-blue"></div>
 
         <div class="panel">
             <div class="scroll-panel">
